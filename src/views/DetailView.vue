@@ -1,5 +1,6 @@
 <template>
-    <div>
+    
+    <div v-show="notFound == false">
         <div class="heading">
 
             <h1>{{ repo?.name }}</h1>
@@ -24,19 +25,25 @@
                
             </div>
         </div>
+    
 
+    </div>
+    <div v-show="notFound == true">
+        <NotFoundVue repo="true"></NotFoundVue>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import NotFoundVue from '@/components/NotFound.vue';
 
 export default {
     data(){
         return {
             repo: {
 
-            }
+            },
+            notFound: null
         }
     },
     mounted(){
@@ -48,8 +55,16 @@ export default {
         }).then(res =>{
 
             this.repo = res.data
+            this.notFound = false
+        }).catch(() => {
+            console.log("shshshshshs")
+            this.notFound = true
+            console.log("shshshshshs", this.notFound)
         })
     },
+    components: {
+        NotFoundVue
+    }
    
 }
 </script>
@@ -63,12 +78,14 @@ export default {
     padding: 20px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .heading{
     display: flex;
     justify-content: space-between;
     align-content: center;
+    padding: 1rem
 }
 
 .carousel-container{
