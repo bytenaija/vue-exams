@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="heading">
         <h1>Repositories</h1>
     </div>
@@ -153,5 +153,10 @@ td {
     width: 100%;
     justify-content: center;
     align-items: center;
+}
+
+.container{
+    width: 90%;
+    margin: 1rem auto;
 }
 </style>
